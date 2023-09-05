@@ -17,7 +17,7 @@ import MessagePage from './pages/MessagePage'
 import Admin from './pages/Admin'
 import Thebusiness from './pages/Thebusiness'
 import Newcompany from './pages/Newcompany'
-import PdfPage from './pages/Pdfpage'
+
 
 
 axios.defaults.baseURL = 'https://waterserver.onrender.com';
