@@ -30,6 +30,10 @@ const MessagePage = () => {
           setLoading(false);
            setCompany(data);
            getuser();
+        }else{
+          setLoading(false);
+           setCompany('');
+          
         }
         
       }catch(e){

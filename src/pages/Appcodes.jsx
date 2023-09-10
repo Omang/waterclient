@@ -6,6 +6,7 @@ import axios from 'axios';
 import FilesMenu from '../components/FilesMenu';
 import { UserContext } from '../UserContext';
 import { GridLoader } from 'react-spinners';
+import FileUploader from '../components/FileUploader';
 
 const Appcodes = () => {
       //const {id, token, role} = useParams();
@@ -13,36 +14,49 @@ const Appcodes = () => {
   const [datax, setDatax] = useState('');
   const [loading, setLoading] = useState(false);
   const [company, setCompany] = useState('');
+  const [error, setError] = useState('');
   const [companycodes, setCompanycodes] = useState([]);
   const [allcode, setAllcode] = useState([]);
   const [allsubcode, setAllsubcode] = useState([]);
+  const [addedphotos, setAddedphotos] = useState([]);
   const [selectlevecode, setSelectlevelcode] = useState('');
   const [selectsubcode, setSelectsubcode] = useState('');
   const [selectapp, setSelectapp] = useState('');
   const [selectvillage, setSelectvillage] = useState('');
   //console.log(token);
-  const Newapplication = async()=>{
+  const Newapplication = async(e)=>{
+     e.preventDefault();
+     if(selectapp == 'sel'){
+        setError('please select a license type')
+        return;
+     }else if(addedphotos === undefined || addedphotos.length == 0){
+      setError('please add atleast one attachment')
+      return;
+     }else{
 
-   try{
-     setLoading(true);
-    const {data} = await axios.post('/app/newapp',{
-      auth_id: user._id,
-      application_type: selectapp,
-      application_village: selectvillage,
-      application_cost: "100",
-    },{
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${user.refreshToken}` 
+      try{
+        setLoading(true);
+       const {data} = await axios.post('/app/newapp',{
+         auth_id: user._id,
+         application_type: selectapp,
+         application_attachment: addedphotos,
+         application_cost: "100",
+       },{
+         headers: {
+           'Content-Type': 'application/json',
+           'Authorization': `Bearer ${user.refreshToken}` 
+         }
+       });
+       setLoading(false);
+       setCompanycodes(data);
+   
+      }catch(e){
+       setLoading(false);
+       console.log(e);
       }
-    });
-    setLoading(false);
-    setCompanycodes(data);
 
-   }catch(e){
-    setLoading(false);
-    console.log(e);
-   }
+     }
+   
 
   }
  
@@ -84,6 +98,9 @@ const Appcodes = () => {
          setCompany(data);
          getuser();
          checkcodes();
+      }else{
+        setLoading(false);
+      setCompany(data);
       }
       
     }catch(e){
@@ -146,34 +163,31 @@ const handleselectvillage=(e)=>{
             </div>
 
             <div className=' flex flex-row md:w-[780px] md:h-[440px] p-2'>
-            {loading ? <GridLoader color={'#7ED321'} loading={loading} size={20} /> : <>{company ? <> <div className="w-1/2">
+            {loading ? <GridLoader color={'#7ED321'} loading={loading} size={20} /> : <>{company ? <> <div className="w-3/4">
                        New Application
                        {companycodes.length !== 0 ? <>
                           
                          </>: <>
-                          <div className="p-4 m-4 flex justify-center">
-            <form className='flex flex-col p-2' onSubmit={Newapplication}>
-              
-          
-           <select onChange={handleselectapp} type="text"  className='border-b border-blue-500  m-3 px-3 '>
-           
-            <option>--Select license Type--</option>
-            <option id={'water'} >Water Rights P100 app</option>
-            <option id={'borehole'} >Borehole Rights P100 app</option>
-          
-           </select>
-
-           <select onChange={handleselectvillage} type="text"  className='border-b border-blue-500  m-3 px-3 '>
-           
-            <option>--Select license Type--</option>
-            <option id={'Gantsi'} >Gantsi region</option>
-            <option id={'Gaborone'} >Gaborone region</option>
-            <option id={'Francistown'} >Francistown region</option>
-            <option id={'Chobe'} >Chobe region</option>
-            <option id={'Thamaga'} >Thamaga region</option>
+                          <div className="p-4 m-4 flex  w-[400px]">
             
+            <form className='flex flex-col p-2 w-full ' onSubmit={Newapplication}>
+              {error &&(
+                <div>
+                  <p className="text-lg text-red-500">{error}</p>
+                </div>
+              )}
+              
+            
+           <select onChange={handleselectapp} type="text"  className='border-b border-blue-500  m-3 px-3 '>
+            <option id={'sel'}>--Select license Type--</option>
+            <option id={'PSDL'} >Precious Stone Dealer License</option>
+            <option id={'DCL'} >Diamond Cutting License</option>
+            <option id={'ERDP'} >Export Rough Diamond Permit</option>
+            <option id={'KPC'} >Kimberly Process Certificate</option>
           
            </select>
+            <h1 className='text-xl'>Upload supporting docs ONLY png, jpeg</h1>
+           <FileUploader addedphotos={addedphotos} onChange={setAddedphotos} />
           
            <div className="flex flex-row justify-center">
            
@@ -186,18 +200,18 @@ const handleselectvillage=(e)=>{
                           </div>
                          </>}
                       </div>
-                      <div className="w-1/2">
+                      <div className="w-1/4">
                        Your Pending Applications
                        {companycodes ? <>
                         {companycodes.length > 0 && companycodes.map(place=>(
-                          <>
-                          <div key={place._id} className='border border-blue-500 rounded-lg p-2 m-2'>
-                             <p className='font-bold underline text-xl'>Application for:...{place.application_type} rights</p>
-                             <p className='font-bold underline text-xl'>Application At:...{place.application_village}</p>
+                          <div key={place._id}>
+                          <div  className='border border-blue-500 rounded-lg p-2 m-2'>
+                             <p className='font-bold underline text-xl'>Application for:...{place.application_type}</p>
+                             
                              <p className='font-bold underline text-xl'>Application cost:...P{place.application_cost}</p>
                              
                           </div>
-                          </>
+                          </div>
                         ))}
                        </>: <>
                         No Applications, Please apply

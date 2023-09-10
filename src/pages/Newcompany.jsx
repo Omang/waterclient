@@ -74,7 +74,7 @@ const checkcipa =(e)=>{
   e.preventDefault();
   //console.log(cipanumber);
   setLoading(true);
-  fetch('https://cipa.onrender.com/cipa/findone',{
+  fetch('http://localhost:4000/cipa/findone',{
     method: "POST",
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify({company_cipa:cipanumber})

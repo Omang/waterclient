@@ -30,11 +30,9 @@ if(redirect){
     <>
     <Link to={`/admin`} className='border-b border-blue-500 hover:text-white hover:bg-blue-500 max-w-full p-2 mt-1 flex items-center justify-center'><FaAddressBook/><h1>
             Home</h1></Link>
-           <Link to={`/admin/files`} className='border-b border-blue-500 hover:text-white hover:bg-blue-500 max-w-full p-2 mt-1 flex items-center justify-center'><FaFileArchive />
-           <h1>Codes Management</h1></Link>
-           <Link to={`/admin/analytics`} className='border-b border-blue-500 hover:text-white hover:bg-blue-500 max-w-full p-2 mt-1 flex items-center justify-center'><FaRegChartBar/>
+           <Link to={`/admin/reports`} className='border-b border-blue-500 hover:text-white hover:bg-blue-500 max-w-full p-2 mt-1 flex items-center justify-center'><FaRegChartBar/>
            <h1>Analytics & Reports</h1></Link>
-           <Link to={`/admin/officers`} className='border-b border-blue-500 hover:text-white hover:bg-blue-500 max-w-full p-2 mt-1 flex items-center justify-center'><FaUsers/>
+           <Link to={`/admin/users`} className='border-b border-blue-500 hover:text-white hover:bg-blue-500 max-w-full p-2 mt-1 flex items-center justify-center'><FaUsers/>
            <h1>Users Management</h1></Link>
            <Link to={`/admin/contractors`} className='border-b border-blue-500 hover:text-white hover:bg-blue-500 max-w-full p-2 mt-1 flex items-center justify-center'><FaTh/>
            <h1>Contractors Management</h1></Link>

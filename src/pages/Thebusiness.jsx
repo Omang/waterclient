@@ -30,6 +30,9 @@ const Thebusiness = () => {
           setLoading(false);
            setCompany(data);
            getuser();
+        }else{
+          setLoading(false);
+           setCompany('');
         }
         
       }catch(e){

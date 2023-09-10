@@ -42,17 +42,17 @@ const IndexPage = () => {
         
               setRedirect(`/admin`);
             
-      }else if(data.role === 'verifier'){
+      }else if(data.role === 'stonedealer'){
             
-              setRedirect(`/verifier`);
+              setRedirect(`/stonedealer`);
 
-    }else if(data.role === 'assessor'){
-      setRedirect(`/assessor`);
-    }else if(data.role === 'evaluator'){
-      setRedirect('/evaluator')
+    }else if(data.role === 'cutting'){
+      setRedirect(`/cutting`);
+    }else if(data.role === 'exportrough'){
+      setRedirect('/exportrough')
     }else{
 
-      setRedirect('/ajuduator');
+      setRedirect('/kimberly');
 
     }
       }

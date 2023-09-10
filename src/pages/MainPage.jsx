@@ -17,6 +17,7 @@ const MainPage = () => {
   const getcompany = async()=>{
     setLoading(true);
     try{
+      console.log(user._id);
       const {data} = await axios.post('/contractor/getcompany',{
         auth_id: user._id
       }, {
@@ -30,6 +31,9 @@ const MainPage = () => {
         setLoading(false);
          setCompany(data);
          getuser();
+      }else{
+        setLoading(false);
+         setCompany('');
       }
       
     }catch(e){

@@ -17,10 +17,15 @@ import MessagePage from './pages/MessagePage'
 import Admin from './pages/Admin'
 import Thebusiness from './pages/Thebusiness'
 import Newcompany from './pages/Newcompany'
+import Users from './pages/admin/Users'
+import Contractors from './pages/admin/Contractors'
+import Reports from './pages/admin/Reports'
+import UserPage from './pages/admin/UserPage'
+import Company from './pages/admin/Company'
 
 
 
-axios.defaults.baseURL = 'https://waterserver.onrender.com';
+axios.defaults.baseURL = 'http://localhost:3000';
 
 function App() {
   
@@ -41,6 +46,11 @@ function App() {
 
 
        <Route path='/admin' element={<Admin/>} />
+       <Route path='/admin/contractors' element={<Contractors/>} />
+       <Route path='/admin/users' element={<Users/>} />
+       <Route path='/admin/reports' element={<Reports/>} />
+       <Route path='/admin/users/manageuser/:id' element={<UserPage />} />
+       <Route path='/admin/singlecompany/:id' element={<Company />} />
        
       </Route>
     </Routes>
