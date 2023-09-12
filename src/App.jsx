@@ -22,6 +22,18 @@ import Contractors from './pages/admin/Contractors'
 import Reports from './pages/admin/Reports'
 import UserPage from './pages/admin/UserPage'
 import Company from './pages/admin/Company'
+import MainCut from './pages/cutting/MainCut'
+import MainKim from './pages/kimberly/MainKim'
+import MainPermit from './pages/permits/MainPermit'
+import MainStone from './pages/stonedealer/MainStone'
+import CutApps from './pages/cutting/CutApps'
+import CuttingApplication from './pages/cutting/CuttingApplication'
+import KimApps from './pages/kimberly/KimApps'
+import KimApplication from './pages/kimberly/KimApplication'
+import PermitApplication from './pages/permits/PermitApplication'
+import PermitApps from './pages/permits/PermitApps'
+import StoneApplication from './pages/stonedealer/StoneApplication'
+import StonesApps from './pages/stonedealer/StonesApps'
 
 
 
@@ -51,6 +63,23 @@ function App() {
        <Route path='/admin/reports' element={<Reports/>} />
        <Route path='/admin/users/manageuser/:id' element={<UserPage />} />
        <Route path='/admin/singlecompany/:id' element={<Company />} />
+
+       <Route path='/officer/kimberly' element={<MainKim />} />
+       <Route path='/officer/kimapps' element={<KimApps />} />
+       <Route path='/officer/kimapp/:id' element={<KimApplication />} />
+
+       <Route path='/officer/cutting' element={<MainCut />} />
+       <Route path='/officer/cuttingapplications' element={<CutApps />} />
+       <Route path='/officer/cuttingapp/:id' element={<CuttingApplication />} />
+
+
+       <Route path='/officer/permits' element={<MainPermit />} />
+       <Route path='/officer/permitsapps' element={<PermitApps />} />
+       <Route path='/officer/permitapp/:id' element={<PermitApplication />} />
+
+       <Route path='/officer/stones' element={<MainStone />} />
+       <Route path='/officer/stonesapps' element={<StonesApps />} />
+       <Route path='/officer/stoneapp/:id' element={<StoneApplication />} />
        
       </Route>
     </Routes>

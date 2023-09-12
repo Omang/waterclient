@@ -23,6 +23,11 @@ const Appcodes = () => {
   const [selectsubcode, setSelectsubcode] = useState('');
   const [selectapp, setSelectapp] = useState('');
   const [selectvillage, setSelectvillage] = useState('');
+  const [cardnumber, setCardnumber] = useState('');
+  const [cvvnumber, setCvvnumber] = useState('');
+  const [appid, setAppid] = useState('');
+  const [loadx, setLoadx] = useState(false);
+  const [paymentmade, setPaymentmade] = useState(false);
   //console.log(token);
   const Newapplication = async(e)=>{
      e.preventDefault();
@@ -122,6 +127,14 @@ const Appcodes = () => {
       console.log(e);
     }
   }
+
+  const payApp = async(e)=>{
+      e.preventDefault();
+    console.log(cardnumber);
+    console.log(cvvnumber);
+    console.log(appid);
+
+  }
  
   useEffect(()=>{
      getcompany();
@@ -163,7 +176,7 @@ const handleselectvillage=(e)=>{
             </div>
 
             <div className=' flex flex-row md:w-[780px] md:h-[440px] p-2'>
-            {loading ? <GridLoader color={'#7ED321'} loading={loading} size={20} /> : <>{company ? <> <div className="w-3/4">
+            {loading ? <GridLoader color={'#7ED321'} loading={loading} size={20} /> : <>{company ? <> <div className="w-1/2">
                        New Application
                        {companycodes.length !== 0 ? <>
                           
@@ -200,16 +213,36 @@ const handleselectvillage=(e)=>{
                           </div>
                          </>}
                       </div>
-                      <div className="w-1/4">
+                      <div className="w-1/2">
                        Your Pending Applications
                        {companycodes ? <>
                         {companycodes.length > 0 && companycodes.map(place=>(
                           <div key={place._id}>
-                          <div  className='border border-blue-500 rounded-lg p-2 m-2'>
+                          <div  className='border flex flex-col border-blue-500 rounded-sm p-2 m-2'>
                              <p className='font-bold underline text-xl'>Application for:...{place.application_type}</p>
                              
                              <p className='font-bold underline text-xl'>Application cost:...P{place.application_cost}</p>
+                            {!place.application_pending && (
+                              <>
+                              {loadx ? <GridLoader color={'#7ED321'} loading={loadx} size={5} /> :
+                              
+                             <>
+                             {paymentmade ? <>
+                                <p className='text-xl text-red-500'>Application Payment Made.</p>
+                             </>: 
+                             <form onSubmit={payApp} className='flex flex-col border-rose-600 border bg-rose-200 p-3 my-2'>
+                             <input type='text' value={cardnumber} onChange={e=>setCardnumber(e.target.value)} className='border-b border-rose-900 mt-2 p-2' placeholder='Card Number' />
+                             <input type='text' value={cvvnumber} onChange={e=>setCvvnumber(e.target.value)} className='border-b border-rose-900 mt-2 p-2' placeholder='Cvv' />
                              
+                             <div className='flex mt-3 items-center justify-center'>
+                                  <button type='submit' className='border rounded-full px-2 bg-blue-500 text-white hover:bg-gray-500'>Pay</button>
+                             </div>
+                            </form>
+                             }
+                             </>
+                              }
+                              </>
+                            )} 
                           </div>
                           </div>
                         ))}

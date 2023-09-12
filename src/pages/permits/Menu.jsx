@@ -29,10 +29,9 @@ const Menu = () => {
   }
   return (
     <>
-    <Link to={`/officer`} className='border-b border-blue-500 hover:text-white hover:bg-blue-500 max-w-full p-2 mt-1 flex items-center justify-center'><h1>
+    <Link to={`/officer/permits`} className='border-b border-blue-500 hover:text-white hover:bg-blue-500 max-w-full p-2 mt-1 flex items-center justify-center'><h1>
             Home</h1></Link>
-            <Link to={`/officer/contractorapps`} className='border-b border-blue-500 hover:text-white hover:bg-blue-500 max-w-full p-2 mt-1 flex items-center justify-center'><h1>Applications</h1></Link>
-           <Link to={`/officer/messages`} className='border-b border-blue-500 hover:text-white hover:bg-blue-500 max-w-full p-2 mt-1 flex items-center justify-center'><h1>Notifications & Alerts</h1></Link>
+            <Link to={`/officer/permitsapps`} className='border-b border-blue-500 hover:text-white hover:bg-blue-500 max-w-full p-2 mt-1 flex items-center justify-center'><h1>Applications</h1></Link>
            <button onClick={logout} className='border-b border-blue-500 hover:text-white hover:bg-blue-500 max-w-full p-2 mt-1 flex items-center justify-center' >Logout</button>
         
     </>

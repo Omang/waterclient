@@ -44,15 +44,15 @@ const IndexPage = () => {
             
       }else if(data.role === 'stonedealer'){
             
-              setRedirect(`/stonedealer`);
+              setRedirect(`/officer/stones`);
 
     }else if(data.role === 'cutting'){
-      setRedirect(`/cutting`);
+      setRedirect(`/officer/cutting`);
     }else if(data.role === 'exportrough'){
-      setRedirect('/exportrough')
+      setRedirect('/officer/permits')
     }else{
 
-      setRedirect('/kimberly');
+      setRedirect('/officer/kimberly');
 
     }
       }
