@@ -7,6 +7,7 @@ import FilesMenu from '../components/FilesMenu';
 import { UserContext } from '../UserContext';
 import { GridLoader } from 'react-spinners';
 import FileUploader from '../components/FileUploader';
+import StripeCheckout from 'react-stripe-checkout';
 
 const Appcodes = () => {
       //const {id, token, role} = useParams();
@@ -128,11 +129,10 @@ const Appcodes = () => {
     }
   }
 
-  const payApp = async(e)=>{
-      e.preventDefault();
-    console.log(cardnumber);
-    console.log(cvvnumber);
-    console.log(appid);
+  const payApp = async(token)=>{
+      
+   console.log(token);
+   console.log(appid);
 
   }
  
@@ -227,17 +227,17 @@ const handleselectvillage=(e)=>{
                               {loadx ? <GridLoader color={'#7ED321'} loading={loadx} size={5} /> :
                               
                              <>
-                             {paymentmade ? <>
-                                <p className='text-xl text-red-500'>Application Payment Made.</p>
+                             {place.application_paid ? <>
+                                <p className='text-xl text-red-500'>Application Payment Made. Waiting..approval</p>
                              </>: 
-                             <form onSubmit={payApp} className='flex flex-col border-rose-600 border bg-rose-200 p-3 my-2'>
-                             <input type='text' value={cardnumber} onChange={e=>setCardnumber(e.target.value)} className='border-b border-rose-900 mt-2 p-2' placeholder='Card Number' />
-                             <input type='text' value={cvvnumber} onChange={e=>setCvvnumber(e.target.value)} className='border-b border-rose-900 mt-2 p-2' placeholder='Cvv' />
+                             <div className='flex flex-col border-rose-600 border bg-rose-200 p-3 my-2'>
                              
                              <div className='flex mt-3 items-center justify-center'>
-                                  <button type='submit' className='border rounded-full px-2 bg-blue-500 text-white hover:bg-gray-500'>Pay</button>
+                                  
+                                  <Link className='border border-blue-500 rounded-full px-3 text-blue-500 hover:bg-red-500' to={`/contractor/payapplication/${place._id}`}>Pay Application fee</Link>
+                                  
                              </div>
-                            </form>
+                            </div>
                              }
                              </>
                               }

@@ -34,6 +34,7 @@ import PermitApplication from './pages/permits/PermitApplication'
 import PermitApps from './pages/permits/PermitApps'
 import StoneApplication from './pages/stonedealer/StoneApplication'
 import StonesApps from './pages/stonedealer/StonesApps'
+import PayPage from './pages/PayPage'
 
 
 
@@ -55,6 +56,7 @@ function App() {
        <Route path='/contractor/messages' element={<MessagePage/>} />
        <Route path='/contractor/thebusiness' element={<Thebusiness/>} />
        <Route path='/contractor/newcompany' element={<Newcompany/>} />
+       <Route path='/contractor/payapplication/:id' element={<PayPage />} />
 
 
        <Route path='/admin' element={<Admin/>} />
