@@ -214,7 +214,7 @@ const handleselectvillage=(e)=>{
                          </>}
                       </div>
                       <div className="w-1/2">
-                       Your Pending Applications
+                        <h1 className='text-red-500 font-semibold'>Application Progress</h1>
                        {companycodes ? <>
                         {companycodes.length > 0 && companycodes.map(place=>(
                           <div key={place._id}>
@@ -222,7 +222,7 @@ const handleselectvillage=(e)=>{
                              <p className='font-bold underline text-xl'>Application for:...{place.application_type}</p>
                              
                              <p className='font-bold underline text-xl'>Application cost:...P{place.application_cost}</p>
-                            {!place.application_pending && (
+                            {!place.application_pending && !place.application_approved && (
                               <>
                               {loadx ? <GridLoader color={'#7ED321'} loading={loadx} size={5} /> :
                               
@@ -230,7 +230,7 @@ const handleselectvillage=(e)=>{
                              {place.application_paid ? <>
                                 <p className='text-xl text-red-500'>Application Payment Made. Waiting..approval</p>
                              </>: 
-                             <div className='flex flex-col border-rose-600 border bg-rose-200 p-3 my-2'>
+                             <div className='flex flex-col  border bg-rose-200 p-3 my-2'>
                              
                              <div className='flex mt-3 items-center justify-center'>
                                   
@@ -243,6 +243,14 @@ const handleselectvillage=(e)=>{
                               }
                               </>
                             )} 
+                             
+                             {place.application_approved && (
+                              <>
+                               <h1 className='text-red-500 text-lg'>Approved</h1>
+                              Generate Copy of {place.application_type} license or Certificate
+                              </>
+                             )}
+
                           </div>
                           </div>
                         ))}

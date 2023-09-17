@@ -90,7 +90,7 @@ return (
   <tbody>
     {apps && apps.map(app=>(
     <>
-    {!app.application_pending && app.application_paid && (
+    {!app.application_pending && app.application_paid && !app.application_approved  && (
       <tr className='hover:bg-blue-300' key={app._id}>
       <td>{app.application_type}</td>
       <td>{app.createdAt}</td>
@@ -106,6 +106,27 @@ return (
                   </div>
                   <div className='my-4'>
                   <h1 className='font-semibold text-red-500'>Approved Application</h1>
+                  <table className="table-auto border border-blue-500 rounded-lg">
+  <thead>
+    <tr className='border border-blue-500 bg-gray-400'>
+      <th className='mx-4 px-2'>Application Type</th>
+      <th className='mx-4 px-2'>Created On</th>
+    </tr>
+  </thead>
+  <tbody>
+    {apps && apps.map(app=>(
+    <>
+    {app.application_approved  && (
+      <tr className='hover:bg-blue-300' key={app._id}>
+      <td>{app.application_type}</td>
+      <td>{app.createdAt}</td>
+      </tr>
+    )}
+    </>
+    ))}
+
+  </tbody>
+</table>
 
                   </div>
             

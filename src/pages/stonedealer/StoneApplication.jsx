@@ -18,8 +18,44 @@ const StoneApplication = () => {
   const [returnhead, setReturnhead]= useState('');
   const [appdata, setAppdata]=useState('');
   const [verifyon, setVerifyon] = useState(false);
+  const [approvedon, setApprovedon] = useState(false);
 
   const applicationreturn =async()=>{
+    
+
+  }
+  const applicationapprove= async(ev, appdata)=>{
+    ev.preventDefault();
+    const app_id = appdata.applicationdetails._id;
+    const auth_id = appdata.companydetails.auth_id;
+
+    try{
+
+      const {data} = await axios.put('/app/approveapp',{
+        app_id: app_id,
+        auth_id: auth_id,
+        user_id: user._id
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${user.refreshToken}` 
+        }
+      });
+      if(data.message){
+        setLoadingx(false);
+        setApprovedon(true);
+      }else{
+        setLoadingx(false);
+        console.log("something bad happend")
+      }
+
+    }catch(e){
+      setLoadingx(false);
+      console.log(e);
+    }
+    //setLoadingx(true);
+    //setApprovedon(true);
+    //setLoadingx(false);
 
   }
   const applicationverify = async(ev, appdata)=>{
@@ -41,8 +77,13 @@ const StoneApplication = () => {
         }
       })
 
+      if(data.message){
       setLoadingx(false);
       setVerifyon(true);
+      }else{
+        setLoadingx(false);
+        console.log(data.something);
+      }
      
     }catch(e){
       setLoadingx(false);
@@ -163,6 +204,40 @@ return (
                    </div>
                    
                    </>}
+
+                  {!appdata.applicationdetails.application_pending && appdata.applicationdetails.application_paid && !appdata.applicationdetails.application_approved && (
+                    <>
+                    <div className='flex flex-col  justify-center mt-4'>
+
+                    {loadingx ? <GridLoader color={'#7ED321'} loading={loadingx} size={5} /> : <>
+                      
+                    {!approvedon ? <>
+                        <button onClick={(ev)=>applicationapprove(ev, appdata)} className='px-2 rounded-2xl border bg-blue-500 text-white hover:bg-red-500'>VerifyDoc</button>
+                        
+                       
+                       </>: <>
+
+                       <p className='px-2 rounded-2xl border bg-blue-500 text-white'>Approved Success</p>
+                       
+                       </>}
+                     
+                    
+                     </>}
+
+                    </div>
+                    </>
+                  )}
+
+                  {!appdata.applicationdetails.application_pending && appdata.applicationdetails.application_paid && appdata.applicationdetails.application_approved && (
+                    <>
+                     <h1 className='font-bold text-red-500'>Approved</h1>
+                    </>
+                  )}
+
+                  
+
+
+
 
                 </div>
                 
