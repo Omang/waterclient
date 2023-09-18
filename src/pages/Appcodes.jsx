@@ -8,6 +8,8 @@ import { UserContext } from '../UserContext';
 import { GridLoader } from 'react-spinners';
 import FileUploader from '../components/FileUploader';
 import StripeCheckout from 'react-stripe-checkout';
+import { PDFDownloadLink, Document, Page } from '@react-pdf/renderer';
+import PdfPage from '../components/PdfPage';
 
 const Appcodes = () => {
       //const {id, token, role} = useParams();
@@ -247,7 +249,14 @@ const handleselectvillage=(e)=>{
                              {place.application_approved && (
                               <>
                                <h1 className='text-red-500 text-lg'>Approved</h1>
-                              Generate Copy of {place.application_type} license or Certificate
+                              Download Copy of {place.application_type} license or Certificate
+                              <p className='border border-blue-500 rounded-full px-2 text-white bg-blue-500 hover:bg-red-500'>
+                              <PDFDownloadLink document={<PdfPage cheader={place} company={company} />} fileName="Diamond.pdf">
+      {({ blob, url, loading, error }) =>
+        loading ? 'Loading document...' : 'Download now!'
+      }
+    </PDFDownloadLink>
+                              </p>
                               </>
                              )}
 

@@ -10,7 +10,8 @@ import { GridLoader } from 'react-spinners';
 const MessagePage = () => {
      //const {id, token, role} = useParams();
      const {user, ready} = useContext(UserContext);
-     const [datax, setDatax] = useState('');
+     const [datax, setDatax] = useState([]);
+     const [nosms, setNosms] = useState('');
      const [loading, setLoading] = useState(false);
      const [company, setCompany] = useState('');
      //console.log(token);
@@ -43,13 +44,14 @@ const MessagePage = () => {
     }
      const getuser = async()=>{
       try{
-        const {data} = await axios.get('/user/getuser/'+ user._id, {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${user.refreshToken}` 
-          }
+        const {data} = await axios.post('/user/allsms', {
+          auth_id: user._id
         });
-        setDatax(data);
+        if(data.message){
+          setDatax(data.message);
+        }else{
+          setNosms('no messages');
+        }
         
       }catch(e){
         console.log(e);
@@ -70,9 +72,21 @@ const MessagePage = () => {
          <TeacherMenu  />
           </div>
 
-          <div className=' flex flex-col md:w-[780px] md:h-[440px]'>
+          <div className=' flex flex-col justify-center md:w-[780px] md:h-[440px]'>
           {loading ? <GridLoader color={'#7ED321'} loading={loading} size={20} /> : <>{company ? <> 
-             <h1 className='font-bold text-xl text-red-500'>Messages and Notifications</h1>
+             
+             {nosms ? 'No messages yet' : <>
+             <div className='flex flex-col px-3 -mt-16 border rounded-md'>
+              <h1 className='font-bold text-xl mt-2  text-red-500'>Messages and Notifications</h1>
+              {datax.length > 0 && datax.map(item=>(
+                <div key={item._id} className='flex flex-col bg-blue-200 border mb-4 border-black'>
+                   <h1 className='font-bold bg-blue-500 text-white'>{item.message_type}</h1>
+                   <p className='text-sm text-black'>{item.themessage}</p>
+                </div>
+              ))}
+
+             </div>
+             </>}
           </>: <>
           <div className='flex justify-center flex-col p-4 m-4'>
           <h1 className='font-bold p-2 m-2'>Please add new Application</h1>
