@@ -35,6 +35,8 @@ import PermitApps from './pages/permits/PermitApps'
 import StoneApplication from './pages/stonedealer/StoneApplication'
 import StonesApps from './pages/stonedealer/StonesApps'
 import PayPage from './pages/PayPage'
+import InspectorMain from './pages/inspector/InspectorMain'
+import Inspector from './pages/inspector/Inspector'
 
 
 
@@ -82,6 +84,10 @@ function App() {
        <Route path='/officer/stones' element={<MainStone />} />
        <Route path='/officer/stonesapps' element={<StonesApps />} />
        <Route path='/officer/stoneapp/:id' element={<StoneApplication />} />
+
+       <Route path='/inspector' element={<InspectorMain />} />
+       <Route path='/inspector/main/:id' element={<Inspector />} />
+
        
       </Route>
     </Routes>

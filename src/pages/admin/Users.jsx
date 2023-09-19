@@ -139,6 +139,7 @@ const Users = () => {
             <option id={'cutting'} >Diamond cutting license assessor</option>
             <option id={'exportrough'}>Export / import Rough Diamond permit assessor</option>
             <option id={'kimberly'}>Kimberly Process certificate assessor</option>
+            <option id={'inspector'}>Money Laundry Inspector</option>
           
            </select>
           <div className="flex flex-row justify-center">

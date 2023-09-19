@@ -47,9 +47,17 @@ const IndexPage = () => {
               setRedirect(`/officer/stones`);
 
     }else if(data.role === 'cutting'){
+
       setRedirect(`/officer/cutting`);
+
     }else if(data.role === 'exportrough'){
+
       setRedirect('/officer/permits')
+
+    }else if(data.role === 'inspector'){
+
+      setRedirect('/inspector')
+
     }else{
 
       setRedirect('/officer/kimberly');
