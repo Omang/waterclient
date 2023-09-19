@@ -59,10 +59,7 @@ const PdfPage =({cheader, company})=>{
         <Document>
       <Page style={styles.page}>
          <View style={styles.layout}>
-            <View style={styles.header}>
-                <Image src={download} />
-            </View>
-            <View >
+            
                 <Text >Certificate</Text>
                 <Text>This is to certify that</Text>
                 <Text >{company.company_name}</Text>
@@ -72,7 +69,7 @@ const PdfPage =({cheader, company})=>{
                 <Text >{cheader.updateAt}</Text>
                 <Text>Check Code</Text>
                 <Text >{cheader._id}</Text>
-            </View>
+            
           </View>
       </Page>
   </Document>

@@ -69,33 +69,27 @@ const updateprofile =async(e)=>{
   }
 
 }
-
-const checkcipa =(e)=>{
-  e.preventDefault();
-  //console.log(cipanumber);
-  setLoading(true);
-  fetch('http://localhost:4000/cipa/findone',{
-    method: "POST",
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({company_cipa:cipanumber})
-  })
-  .then(function (response) {
-    return response.json()
-  })
-  .then(function (response) {
+const checkcipa = async(ev)=>{
+  ev.preventDefault();
+  try{
+    setLoading(true);
+      const {data} = await axios.post('/contractor/checkcipa', {
+        company_cipa:cipanumber
+      })
+      if(data.message){
+        setLoading(false);
+        setCipa(data.message);
+      }else{
+        setLoading(false);
+        setCipaerror(true);
+      }
+  }catch(e){
     setLoading(false);
-    if(response == null){
-      setCipaerror(true);
-    }else{
-      setCipa(response);
-    }
-    console.log(response); // now this is the body of the response
-  }).catch(function(error){
-    setLoading(false);
-    console.log(error);
-  })
-
+    console.log(e)
+  }
 }
+
+
 
 if(redirect){
   return <Navigate to={redirect} />
